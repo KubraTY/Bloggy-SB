@@ -6,10 +6,10 @@ export const BlogContext = createContext();
 const BlogContextProvider = ({ children }) => {
     const [blogPosts, setBlogPosts] = useState([]);
     const [visible, setVisible] = useState(4);
-   // const [url, setUrl] = useState('https://frontend-case-api.sbdev.nl/api/posts?page=');
     const [pageLinks, setPageLinks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(null);
+    const [categories, setCategories] = useState([]);
     const TOKEN = 'pj11daaQRz7zUIH56B9Z';
 
     const fetchBlogPosts = async () => {
@@ -29,10 +29,6 @@ const BlogContextProvider = ({ children }) => {
         }
     };
 
-    useEffect(() => {
-        fetchBlogPosts();
-        console.log(blogPosts)
-    }, [ currentPage]);
 
     const createPost = async (postData) => {
         try {
@@ -41,18 +37,26 @@ const BlogContextProvider = ({ children }) => {
             formData.append("content", postData.content);
             formData.append("category_id", postData.categoryId);
             formData.append("image", postData.image);
-
+    
             const response = await axios.post('https://frontend-case-api.sbdev.nl/api/posts', formData, {
                 headers: {
                     token: 'pj11daaQRz7zUIH56B9Z',
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log('Post created:', response.data);
+    
+            if (response.status === 201) { // Check for status code 201 (Created) instead of 200
+                console.log('Post created:', response.data);
+                fetchBlogPosts(); // Update the list of blog posts after successfully creating a new post
+            } else {
+                console.error("Error creating post:", response.statusText);
+                fetchBlogPosts(); 
+            }
         } catch (error) {
-            console.error('Error creating post:', error);
+            console.error('Error creating postt:', error);
         }
     };
+    
 
     const handlePageChange = async (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -70,7 +74,26 @@ const BlogContextProvider = ({ children }) => {
             console.error('There is an error', error);
         }
     };
+
+    const getCategories = async () => {
+        try {
+            const response = await axios.get('https://frontend-case-api.sbdev.nl/api/categories', {
+                headers: {
+                    token: TOKEN
+                }
+            });
+            setCategories(response.data);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    };
     
+    useEffect(() => {
+        fetchBlogPosts();
+        getCategories();
+        console.log(blogPosts)
+        console.log(categories)
+    }, [ currentPage]);
 
     return (
         <BlogContext.Provider
@@ -80,7 +103,8 @@ const BlogContextProvider = ({ children }) => {
                 createPost,
                 handlePageChange,
                 currentPage,
-                lastPage
+                lastPage,
+                categories
             }}
         >
             {children}
