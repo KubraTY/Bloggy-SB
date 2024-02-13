@@ -1,0 +1,20 @@
+.pagination {
+    display: inline-flex;
+    gap: 5px;
+}
+
+.paginationButton {
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.paginationButton.activePage {
+    background-color: red;
+    color: white;
+}
+
+.paginationSeparator {
+    padding: 5px;
+}
