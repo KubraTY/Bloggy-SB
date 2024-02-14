@@ -5,7 +5,6 @@ export const BlogContext = createContext();
 
 const BlogContextProvider = ({ children }) => {
     const [blogPosts, setBlogPosts] = useState([]);
-    const [visible, setVisible] = useState(4);
     const [pageLinks, setPageLinks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(null);
@@ -27,6 +26,7 @@ const BlogContextProvider = ({ children }) => {
         } catch (error) {
             console.error('There is an error', error);
         }
+        console.log(blogPosts)
     };
 
 
@@ -89,10 +89,9 @@ const BlogContextProvider = ({ children }) => {
     };
     
     useEffect(() => {
-        fetchBlogPosts();
+        fetchBlogPosts(currentPage);
         getCategories();
-        console.log(blogPosts)
-        console.log(categories)
+        //console.log(blogPosts)
     }, [ currentPage]);
 
     return (
