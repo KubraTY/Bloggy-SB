@@ -1,3 +1,5 @@
+@import '../App.css';
+
 .pagination {
     display: inline-flex;
     gap: 5px;

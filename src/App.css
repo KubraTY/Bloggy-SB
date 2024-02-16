@@ -1,6 +1,7 @@
 :root {
   --main-orange:#E95E30;
-  --main-background: #ffffff;
+  --main-background:#F4F4F4;
+  --background2: #ffffff;
   --main-title-color:#262626;
   --text-color:#868686;
   --light-orange: #F27623;
@@ -13,30 +14,27 @@
   padding: 0;
   line-height: 1.4;
 }
+body{
+  background-color: var(--main-background);
+}
 
 .container {
   max-width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  margin-inline: 80px;
   min-height: 80vh;
 }
 
-@media screen and (min-width: 992px) {
-  .container {
-    max-width: 949px;
-  }
+.mainBtn1{
+    width: 50%;
+    color: var(--main-background);
+    background-color: var(--light-orange);
+    margin: 1.5rem auto 0;
+    padding: .5rem;
+    border: none;
+    border-radius: 15px;
 }
-
-@media screen and (min-width: 768px) {
-  .container {
-      max-width: 720px;
-  }
-}
-
-@media screen and (min-width: 576px) {
-  .container {
-      max-width: 540px;
+@media screen and (min-width: 1024px){
+  .container{
+    margin-inline: 49.5px;
   }
 }

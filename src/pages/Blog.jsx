@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BlogContext } from '../context/BlogContext';
 import BlogCard from '../components/BlogCard';
-import styles from '../styles/blog.module.css'
+import styles from '../styles/blog.module.css';
 
 const Blog = () => {
-    const { blogPosts, fetchBlogPosts, handlePageChange, currentPage, lastPage } = useContext(BlogContext);
+    const { blogPosts, fetchBlogPosts, handlePageChange, currentPage, lastPage, perPageCount } = useContext(BlogContext);
     const [loading, setLoading] = useState(true);
     const [isFetchingData, setIsFetchingData] = useState(false); 
-
-    const postsPerPage = 8;
 
     const fetchData = async () => {
         try {
@@ -24,7 +22,7 @@ const Blog = () => {
 
     useEffect(() => {
         fetchData();
-    }, [currentPage]); 
+    }, [currentPage, perPageCount]); 
 
     const renderBlogPosts = () => {
         return (
@@ -96,10 +94,6 @@ const Blog = () => {
         });
     };
     
-    
-    
-    
-
     return (
         <>
             <p>Blog Page</p>
@@ -109,11 +103,10 @@ const Blog = () => {
                 <>
                     {renderBlogPosts()}
                     <div className={styles.pagination}>
-    <button onClick={() => !isFetchingData && handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-    {generatePagination()}
-    <button onClick={() => !isFetchingData && handlePageChange(currentPage + 1)} disabled={currentPage === lastPage}>Next</button>
-</div>
-
+                        <button onClick={() => !isFetchingData && handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        {generatePagination()}
+                        <button onClick={() => !isFetchingData && handlePageChange(currentPage + 1)} disabled={currentPage === lastPage}>Next</button>
+                    </div>
                 </>
             )}
         </>

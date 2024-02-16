@@ -9,6 +9,8 @@ const BlogContextProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [perPageCount, setPerPageCount] = useState(4); 
+    const [blogs, setBlogs] = useState([]);
     const TOKEN = 'pj11daaQRz7zUIH56B9Z';
 
     const fetchBlogPosts = async () => {
@@ -26,9 +28,27 @@ const BlogContextProvider = ({ children }) => {
         } catch (error) {
             console.error('There is an error', error);
         }
-        console.log(blogPosts)
     };
 
+    const fetchLatestPosts = async (page, firstCall=false) => {
+        try {
+            const response = await axios.get(
+                `https://frontend-case-api.sbdev.nl/api/posts?page=${page}&perPage=${perPageCount}&sortBy=created_at&sortDirection=desc`,
+                {
+                    headers: {
+                        token: "pj11daaQRz7zUIH56B9Z",
+                    },
+                }
+            );
+            //setBlogs(prevBlogs => [...prevBlogs, ...response.data.data]);
+            const newPosts = response.data.data.filter(post => !blogs.find(existingPost => existingPost.id === post.id));
+            console.log("PAge:",page);
+            console.log(newPosts)
+            setBlogs(prevBlogs => firstCall ? newPosts : [...prevBlogs, ...newPosts])
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        }
+    };
 
     const createPost = async (postData) => {
         try {
@@ -45,9 +65,9 @@ const BlogContextProvider = ({ children }) => {
                 }
             });
     
-            if (response.status === 201) { // Check for status code 201 (Created) instead of 200
+            if (response.status === 201) { 
                 console.log('Post created:', response.data);
-                fetchBlogPosts(); // Update the list of blog posts after successfully creating a new post
+                fetchBlogPosts();
             } else {
                 console.error("Error creating post:", response.statusText);
                 fetchBlogPosts(); 
@@ -89,10 +109,10 @@ const BlogContextProvider = ({ children }) => {
     };
     
     useEffect(() => {
-        fetchBlogPosts(currentPage);
+        fetchBlogPosts(currentPage, perPageCount);
         getCategories();
-        //console.log(blogPosts)
-    }, [ currentPage]);
+        //fetchLatestPosts(1)
+    }, [currentPage, perPageCount]);
 
     return (
         <BlogContext.Provider
@@ -103,7 +123,12 @@ const BlogContextProvider = ({ children }) => {
                 handlePageChange,
                 currentPage,
                 lastPage,
-                categories
+                categories,
+                setCurrentPage,
+                perPageCount,
+                setPerPageCount,
+                fetchLatestPosts,
+                blogs
             }}
         >
             {children}
