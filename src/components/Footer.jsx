@@ -1,9 +1,10 @@
-const Footer = () => {
-    return(
-        <>
-        <p>This is Footer</p>
-        </>
-    )
-}
+import React from 'react'
+import styles from '../styles/footer.module.css';
 
-export default Footer
+export default function Footer() {
+  return (
+    <footer>
+        <p>&copy; Copyright Social Brothers - 2022</p>
+    </footer>
+  )
+}

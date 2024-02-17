@@ -3,7 +3,12 @@
 .homeContainer{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1rem;
+    gap: 4rem;
     justify-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .homeContainer {
+        grid-template-columns: 1fr; /* Adjust the number of columns for smaller screens */
+    }
 }

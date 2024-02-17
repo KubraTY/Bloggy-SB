@@ -1,14 +1,15 @@
 :root {
   --main-orange:#E95E30;
   --main-background:#F4F4F4;
-  --background2: #ffffff;
+  --background2: #FFFFFF;
   --main-title-color:#262626;
   --text-color:#868686;
   --light-orange: #F27623;
+  --input-background:#FAFAFA;
+  --background3:#6d6c6c;
 }
 
 * {
-  font-family: "Proxima Nova","Arial", "Roboto", sans-serif;
   color: var(--label-text-color);
   margin: 0;
   padding: 0;
@@ -36,5 +37,10 @@ body{
 @media screen and (min-width: 1024px){
   .container{
     margin-inline: 49.5px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .container{
+    margin-inline: 20px;
   }
 }

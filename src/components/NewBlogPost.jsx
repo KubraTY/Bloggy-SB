@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { BlogContext } from '../context/BlogContext';
+import { IoCameraOutline } from "react-icons/io5";
+import styles from '../styles/newBlogPost.module.css';
 
 const NewBlogPost = () => {
-    const { categories, createPost } = useContext(BlogContext); // Extracting categories from the context
+    const { categories, createPost } = useContext(BlogContext); 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [categoryId, setCategoryId] = useState('');
@@ -16,13 +18,11 @@ const NewBlogPost = () => {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("category_id", categoryId); // Use categoryId state
+        formData.append("category_id", categoryId); 
         formData.append("image", image);
 
         try {
-            await createPost({ title, content, categoryId, image }); // Use createPost function from context
-
-            // Clear form fields after successful post creation
+            await createPost({ title, content, categoryId, image }); 
             setTitle('');
             setContent('');
             setCategoryId('');
@@ -34,32 +34,31 @@ const NewBlogPost = () => {
     
 
     return (
-        <div>
-            <h2>Create a New Blog Post</h2>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        <div className={styles.formContainer}>
+            <h2>Plaats een blog bericht</h2>
+            {errorMessage && <p style={styles.errorMessage}>{errorMessage}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                </div>
-                <div>
-                    <label>Content:</label>
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)} />
-                </div>
-                <div>
-                    <label>Category:</label>
-                    <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-                        <option value="">Select a category</option>
-                        {categories.map(category => (
+                
+                <label>Berichtnaam</label>
+                <input type="text" name="title" id="title" placeholder="Geen titel" required value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <label>Categorie</label>
+                <select name="category_id" id='category' defaultValue={'Geen categorie'} required value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                    <option value="" disabled>Geen categorie</option>
+                    {categories.map(category => (
                             <option key={category.id} value={category.id}>{category.name}</option>
                         ))}
-                    </select>
-                </div>
-                <div>
-                    <label>Image:</label>
-                    <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-                </div>
-                <button type="submit">Submit</button>
+                </select>
+                <label>Header afbeelding</label>
+                <div className={styles.uploadField}>
+    <div className={styles.iconWrapper}>
+        <IoCameraOutline className={styles.cameraIcon} />
+    </div>
+    <input type="file" accept=".jpg, .png" id="image" name="image" hidden required onChange={(e) => setImage(e.target.files[0])}/>
+    <label htmlFor="image" className={styles.uploadButton}>Kies bestand</label>
+</div>
+                <label>Bericht</label>
+                <textarea name="content" id='content' rows="10" required value={content} onChange={(e) => setContent(e.target.value)}/>
+                <button type="submit" className={styles.submitBtn}>Submit</button>
             </form>
         </div>
     );

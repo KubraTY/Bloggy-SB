@@ -2,7 +2,7 @@
 
 .cardContainer{
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.133);
-    min-height: 250px;
+    height: 263px;
     width: 100%;
     max-width: 220px;
     overflow: hidden;
@@ -42,4 +42,5 @@
 }
 .postContent p {
     color: #868686;
+    font-size: 0.8rem;
 }

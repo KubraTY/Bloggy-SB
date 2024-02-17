@@ -1,0 +1,73 @@
+@import '../App.css';
+
+.formContainer{
+    width: 100%;
+    height: max-content;
+    background-color:var(--background2);
+    padding: 2rem 1rem;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.249);
+}
+.formContainer h2{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.errorMessage{
+    color: var(--main-orange)
+}
+
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.formContainer label:not(.uploadButton) {
+    margin: 1.5rem 0 .5rem;
+    font-size: .8rem;
+    color: var(--text-color);
+}
+.formContainer input, .formContainer textarea, .formContainer select, .uploadField {
+    background-color: var(--input-background);
+    padding: 0.5rem 1rem;
+    border: none;
+    outline-color: var(--light-orange);
+}
+::placeholder,
+.formContainer select {
+    font-style: italic;
+    color:#CECECE
+}
+.formContainer select {
+    border-right: 1rem solid transparent
+}
+ option:disabled {
+    background-color: #CECECE;
+    color: white;
+}
+.uploadField {
+    display: flex;
+    align-items: center; 
+    width: fit-content;
+}
+
+.iconWrapper {
+    margin-right: 10px; 
+}
+.uploadButton {
+    margin: 0;
+    padding: .6rem 1rem;
+    cursor: pointer;
+    background-color: var(--background3);
+    color: white;
+    border-radius: 20px;
+    font-size: .8rem;
+}
+.submitBtn{
+    width: 50%;
+    color: white;
+    background-color: var(--light-orange);
+    margin: 1.5rem auto 0;
+    padding: .5rem;
+    border: none;
+    border-radius: 15px;
+}
+
