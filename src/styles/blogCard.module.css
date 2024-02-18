@@ -9,7 +9,7 @@
 }
 
 .imageContainer{
-    height: 70px;
+    height: 4.5rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -35,7 +35,7 @@
 .postContent {
     margin: 1rem;
 }
-.blogpostContent .title {
+.postContent .title {
     margin-bottom: .5rem;
     color: #262626;
     font-size: 1.2rem;
@@ -43,4 +43,5 @@
 .postContent p {
     color: #868686;
     font-size: 0.8rem;
+    margin-bottom: .5rem;
 }

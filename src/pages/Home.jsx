@@ -12,8 +12,6 @@ const Home = () => {
 
     useEffect(() => {
         fetchLatestPosts(1, true);
-        console.log("Home page render");
-        console.log(blogs);
     }, []);
 
     const fetchLatestData = async (visible) => {

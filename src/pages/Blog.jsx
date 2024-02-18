@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { BlogContext } from '../context/BlogContext';
 import BlogCard from '../components/BlogCard';
 import styles from '../styles/blog.module.css';
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
+import { HiArrowLongRight, HiArrowLongLeft} from "react-icons/hi2";
+
 
 const Blog = () => {
     const { blogPosts, fetchBlogPosts, handlePageChange, currentPage, lastPage, perPageCount } = useContext(BlogContext);
@@ -26,7 +29,7 @@ const Blog = () => {
 
     const renderBlogPosts = () => {
         return (
-            <ul>
+            <ul className={styles.blogPosts}>
                 {blogPosts.map(post => (
                     <li key={post.id}>
                         <BlogCard post={post} />
@@ -75,9 +78,9 @@ const Blog = () => {
         return buttons.map((button, index) => {
             if (button === '...') {
                 return (
-                    <span key={index} className="pagination-separator">
-                        ...
-                    </span>
+                    <div key={index} className={styles.paginationSeparator}>
+                        <span>...</span> 
+                    </div>
                 );
             } else {
                 return (
@@ -96,16 +99,15 @@ const Blog = () => {
     
     return (
         <>
-            <p>Blog Page</p>
             {loading ? (
                 <p>Loading...</p>
             ) : (
                 <>
                     {renderBlogPosts()}
                     <div className={styles.pagination}>
-                        <button onClick={() => !isFetchingData && handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        <button className={styles.prev} onClick={() => !isFetchingData && handlePageChange(currentPage - 1)} disabled={currentPage === 1}> <HiArrowLongLeft /> Vorige pagina </button>
                         {generatePagination()}
-                        <button onClick={() => !isFetchingData && handlePageChange(currentPage + 1)} disabled={currentPage === lastPage}>Next</button>
+                        <button className={styles.next} onClick={() => !isFetchingData && handlePageChange(currentPage + 1)} disabled={currentPage === lastPage}> Volgende pagina <HiArrowLongRight /> </button>
                     </div>
                 </>
             )}

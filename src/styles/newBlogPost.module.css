@@ -70,4 +70,6 @@
     border: none;
     border-radius: 15px;
 }
-
+ .cameraIcon{
+    margin-right: 0.5rem;
+ }

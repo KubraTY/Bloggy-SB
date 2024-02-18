@@ -1,22 +1,61 @@
 @import '../App.css';
 
 .pagination {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 1.5rem auto 0;
+    overflow: hidden;
     gap: 5px;
+    color: var(--pagination-color);
 }
 
 .paginationButton {
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    padding: 0.5rem;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-}
-
-.paginationButton.activePage {
-    background-color: red;
-    color: white;
 }
 
 .paginationSeparator {
     padding: 5px;
+    display: flex;
+    align-items: center;
 }
+.blogPosts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blogPosts li {
+    width: 100%;
+}
+
+.paginationButton.activePage {
+    background-color: #F2F2F2;
+    border-radius: 50%;
+    padding: .5rem .8rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.prev, .next {
+    color: var(--light-orange);
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap:.5rem
+}
+@media screen and (max-width: 768px) {
+    .blogPosts {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+
+

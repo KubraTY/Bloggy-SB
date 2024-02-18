@@ -42,8 +42,6 @@ const BlogContextProvider = ({ children }) => {
             );
             //setBlogs(prevBlogs => [...prevBlogs, ...response.data.data]);
             const newPosts = response.data.data.filter(post => !blogs.find(existingPost => existingPost.id === post.id));
-            console.log("PAge:",page);
-            console.log(newPosts)
             setBlogs(prevBlogs => firstCall ? newPosts : [...prevBlogs, ...newPosts])
         } catch (error) {
             console.error('Error fetching posts:', error);

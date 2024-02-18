@@ -40,9 +40,9 @@ const NewBlogPost = () => {
             <form onSubmit={handleSubmit}>
                 
                 <label>Berichtnaam</label>
-                <input type="text" name="title" id="title" placeholder="Geen titel" required value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <input type="text" placeholder="Geen titel" required value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <label>Categorie</label>
-                <select name="category_id" id='category' defaultValue={'Geen categorie'} required value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+                <select required value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
                     <option value="" disabled>Geen categorie</option>
                     {categories.map(category => (
                             <option key={category.id} value={category.id}>{category.name}</option>
@@ -50,14 +50,12 @@ const NewBlogPost = () => {
                 </select>
                 <label>Header afbeelding</label>
                 <div className={styles.uploadField}>
-    <div className={styles.iconWrapper}>
-        <IoCameraOutline className={styles.cameraIcon} />
-    </div>
-    <input type="file" accept=".jpg, .png" id="image" name="image" hidden required onChange={(e) => setImage(e.target.files[0])}/>
-    <label htmlFor="image" className={styles.uploadButton}>Kies bestand</label>
-</div>
+                <IoCameraOutline className={styles.cameraIcon} />
+                    <input type="file" id="image"   hidden required  onChange={(e) => setImage(e.target.files[0])}/>
+                    <label htmlFor="image" className={styles.uploadButton}>Kies bestand</label>
+                </div>
                 <label>Bericht</label>
-                <textarea name="content" id='content' rows="10" required value={content} onChange={(e) => setContent(e.target.value)}/>
+                <textarea name="content" rows="10" required value={content} onChange={(e) => setContent(e.target.value)}/>
                 <button type="submit" className={styles.submitBtn}>Submit</button>
             </form>
         </div>
