@@ -65,10 +65,10 @@ const BlogContextProvider = ({ children }) => {
     
             if (response.status === 201) { 
                 console.log('Post created:', response.data);
-                fetchBlogPosts();
+                fetchLatestPosts()
             } else {
                 console.error("Error creating post:", response.statusText);
-                fetchBlogPosts(); 
+                fetchLatestPosts()
             }
         } catch (error) {
             console.error('Error creating postt:', error);
@@ -109,7 +109,6 @@ const BlogContextProvider = ({ children }) => {
     useEffect(() => {
         fetchBlogPosts(currentPage, perPageCount);
         getCategories();
-        //fetchLatestPosts(1)
     }, [currentPage, perPageCount]);
 
     return (

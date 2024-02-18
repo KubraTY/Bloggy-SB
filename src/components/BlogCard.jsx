@@ -25,7 +25,7 @@ const BlogCard = ({ post }) => {
             <div className={styles.postContent}>
                 <h2 className={styles.title}>{post.title.toUpperCase()}</h2>
                 <p>
-                    {post.content.slice(0, 100) + "..."}
+                    {post.content.slice(0, 166) + "..."}
                 </p>
             </div>
             {showModal && (
