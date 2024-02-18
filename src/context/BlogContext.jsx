@@ -36,7 +36,7 @@ const BlogContextProvider = ({ children }) => {
                 `https://frontend-case-api.sbdev.nl/api/posts?page=${page}&perPage=${perPageCount}&sortBy=created_at&sortDirection=desc`,
                 {
                     headers: {
-                        token: "pj11daaQRz7zUIH56B9Z",
+                        token: TOKEN,
                     },
                 }
             );
@@ -58,7 +58,7 @@ const BlogContextProvider = ({ children }) => {
     
             const response = await axios.post('https://frontend-case-api.sbdev.nl/api/posts', formData, {
                 headers: {
-                    token: 'pj11daaQRz7zUIH56B9Z',
+                    token: TOKEN,
                     'Content-Type': 'multipart/form-data'
                 }
             });

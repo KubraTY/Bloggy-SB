@@ -3,16 +3,18 @@ import NewBlogPost from '../components/NewBlogPost';
 import BlogList from '../components/BlogList';
 import { BlogContext } from '../context/BlogContext';
 import styles from '../styles/home.module.css';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
     const { fetchLatestPosts, blogs } = useContext(BlogContext);
     const [visible, setVisible] = useState(4);
     const [loading, setLoading] = useState(false);
     const perPageCount = 4;
+    const location = useLocation();
 
     useEffect(() => {
         fetchLatestPosts(1, true);
-    }, []);
+    }, [location.pathname]);
 
     const fetchLatestData = async (visible) => {
         try {

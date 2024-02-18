@@ -45,3 +45,12 @@
     top: 0;
     object-fit: cover;
 }
+.title{
+    margin-block: .5rem;
+    color: var(--main-title-color);
+}
+
+.content{
+    margin-bottom: .5rem;
+    color: var(--text-color);
+}

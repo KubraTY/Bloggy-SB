@@ -9,8 +9,8 @@ const Modal = ({ post, onClose }) => {
                 <div className={styles.imageContainer}>
                 <img  src={`https://frontend-case-api.sbdev.nl/storage/${post.img_url}`} alt={post.title} />
                 </div>
-                <h2>{post.title.toUpperCase()}</h2>
-                <p>{post.content}</p>
+                <h2 className={styles.title}>{post.title.toUpperCase()}</h2>
+                <p className={styles.content}>{post.content}</p>
             </div>
         </div>
     );
